@@ -97,7 +97,7 @@
             @endif
     <form action="{{route('account_login')}}" method="post">
     <label>your email<input name="email" placeholder="email" type="email"></label>
-    <label class="l" >your password<input name="password" class="in1" placeholder="password" type="password"><span><a href="{{route('Route_forgetPassword')}}">forgot?</a></span></label>
+    <label class="l" >your password<input name="password" class="in1" placeholder="password" type="password"><span><a href="{{ route('resetPasswordPage') }}">forgot?</a></span></label>
     @csrf
 
     <button class="b1" type="submit">login now</button>

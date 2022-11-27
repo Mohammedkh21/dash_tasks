@@ -1,0 +1,221 @@
+.body{
+    background-color: #ffffff;
+    margin: 0px;
+    padding: 0px;
+}
+ #d1{
+    margin: 0px;
+    padding: 0px;
+
+}
+#d1_d1{
+    margin: 0px;
+    padding: 0px;
+    
+}
+#d1_d1 div {
+    height: 50px;
+   
+    border-style: solid;
+    border-color: rgb(193, 190, 190);
+    
+    border-width: 1px;
+    margin: 0px;
+}
+#d1_d1 div p {
+    position:relative; 
+    text-align: center;
+    margin: 5px;
+}
+#d1_d1 div img {
+    width: 150px;
+    height: 35px;
+} 
+.li_a {
+    color: black;
+   
+}
+.li_a:active{
+    color: black;
+}
+.li_a:focus{
+    color: black;
+}
+.li_a:visited {
+    color: black;
+}
+ul {
+    padding: 20px 200px 20px 0px ;
+}
+#ul_1 li {
+    margin-right: 20px;
+}
+#ul_1 li :hover {
+    color: red;
+    
+}
+#ul_1 {
+    margin: 0px;
+}
+#s1{
+    font-size: 33px;
+    position: relative;
+    float: right;
+    font-weight: bold;
+}
+.s2{
+    position: relative;
+    float: left;
+}
+.s2:hover{
+    color: red;
+}
+.card {
+    margin: 30px  0px 0px 30px ;
+    float: right;
+}
+.card:hover {
+    border-color: red;
+}
+#showMore{
+    border-radius: 100%; 
+    background-color: red;
+    height:200px ;
+    width: 200px;
+    text-align: center;
+    padding-top: 70px; 
+}
+#vb :hover{
+    background-color: rgb(26, 21, 21);
+}
+.vv {
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    border: 1px solid #111010;
+}
+.cardB{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-color: black;
+}
+.inp {
+    text-align: right;
+    width: 300px;
+    height: 40px;
+    margin: 10px 0 0 0;
+}
+.butt {
+    
+    position: absolute;
+    top: 231px;
+    right:  225px;
+    height: 30px;
+    margin: 0px ;
+}
+.infoD {
+    text-align: right;
+}
+#ul_info {
+    text-align: right;
+}
+#ul_info li span {
+    font-size: 15px;
+}
+#infodd span {
+    color: white;
+}
+#lsteD {
+    height: 70px;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid aqua;
+    border-bottom: 1px solid aqua;
+    position: relative;
+    top: 400px;
+    padding-left: 700px;
+}
+#lsteD img {
+    float: right;
+    margin: 20px 20px 0 0;
+    border-radius: 100%; 
+    background-color: green;
+    height:30px ;
+    width: 30px;
+    padding: 0;
+    position: relative;
+    bottom: 290px;
+    right: 555px;
+}
+#sershFor{
+    opacity: 1;
+    text-align: right;
+    margin: 0px;
+    width: 735px;
+    border: 0px;
+    height: 33px;
+    text-align: right;
+
+}
+
+#d1_d1 div div{
+    position: relative;
+    right: -70px;
+    border: 0px;
+}
+#sershIcon{
+    position: relative;
+    top: -30px;
+    right: 5px;
+    color: red;
+}
+#iconH{
+    border-radius: 100%;
+    background-color: red;
+    position: absolute;
+    color: white;
+    font-size: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    right: 33px;
+    
+}
+#iconB{
+    border-radius: 100%;
+    background-color: red;
+    position: absolute;
+    color: white;
+    font-size: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    right: 7px;
+}
+#sb1{
+    position: relative;
+    font-size: 15px;
+    top: -7px;
+    opacity: 0.7;
+
+}
+#sb2{
+    position: absolute;
+    top: 12px;
+    right: 37px;
+    font-size: 14px;
+    color: red;
+    font-weight: bold;
+}
+.linkLine{
+    height: 5px;
+    width: 0px;
+    background-color: red;
+    margin: 0;
+    border-radius: 5px;
+    transition: width 1s;
+    float: right;
+    
+}
+.nav-item:hover div {
+    width: 100%;
+    transition: width 1s;
+}

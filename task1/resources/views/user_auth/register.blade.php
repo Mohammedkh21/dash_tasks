@@ -73,32 +73,36 @@
 
 <div>
 
-    <form action="{{ route('account_register') }}" method="post" >
+    <form action="{{ route('account_register') }}" method="post" enctype="multipart/form-data" >
         @csrf
         <h1>create account</h1>
         <p>the new you!</p>
+        @if(Session::has('message'))
+            <div style="color: white; " class="alert alert-success ">{{ Session::get('message') }}</div>
+        @endif
 
 
         <label>name <input name="name" placeholder="first name" type="text"></label>
         @error('name')
-            <small style="color: red" id="emailHelp" class="form-text text-danger">{{$message}}</small>
+            <p style="color: red ;margin: 0;font-size: 12px"  >{{$message}}</p>
         @enderror
 
         <label>your email<input name="email" placeholder="your email" type="email"></label>
         @error('email')
-            <small style="color: red" id="emailHelp" class="form-text text-danger">{{$message}}</small>
+        <p style="color: red ;margin: 0;font-size: 12px"  >{{$message}}</p>
         @enderror
 
         <label>your password<input name="password" placeholder="your password" type="password"></label>
         @error('password')
-            <small style="color: red" id="emailHelp" class="form-text text-danger">{{$message}}</small>
+        <p style="color: red ;margin: 0;font-size: 12px"  >{{$message}}</p>
         @enderror
 
         <label>confirm password<input name="confirm_password" placeholder="confirm password" type="password"></label>
         @error('confirm_password')
-            <small style="color: red" id="emailHelp" class="form-text text-danger">{{$message}}</small>
+        <p style="color: red ;margin: 0;font-size: 12px"  >{{$message}}</p>
         @enderror
 
+        <label>add photo <input name="photo" type="file"></label>
 
         <button class="b1" type="submit">create account</button>
 

@@ -27,7 +27,8 @@ class AcountRegisterRequest extends FormRequest
             'name' => 'required|max:100|unique:users,name',
             'email' => 'required|email|max:255|unique:users,email',
             'password' =>'required',
-            'confirm_password' => 'same:password'
+            'confirm_password' => 'same:password',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
         public function messages(){
