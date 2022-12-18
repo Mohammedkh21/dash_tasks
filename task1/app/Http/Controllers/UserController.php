@@ -44,7 +44,7 @@ class UserController extends Controller
         if(  Auth::guard()->attempt($request->only('email','password'))   ) {
             //return view('home');
             return response()->json(['message'=>'login succeeded']);
-        } 
+        }
 
         return response()->json(['message'=>'email not found or password false'],404);
     }
