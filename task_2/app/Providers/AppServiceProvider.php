@@ -28,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('OwnerProducts',function ( $admin){
             return $admin->owner == 1;
         });
+
     }
 }

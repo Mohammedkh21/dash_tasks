@@ -53,30 +53,6 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> password </label>
-                                                            <input type="password" value="" id="password" class="form-control" placeholder="password" name="password">
-                                                            @error('password')
-                                                            <small class="text-danger">{{ $message }}</small>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> password confirm  </label>
-                                                            <input type="password" value="" id="password_confirm" class="form-control" placeholder="password confirm " name="password_confirm">
-                                                            @error('password_confirm')
-                                                            <small class="text-danger">{{ $message }}</small>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
                                             </div>
 
 

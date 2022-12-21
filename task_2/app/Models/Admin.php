@@ -10,7 +10,7 @@ use mysql_xdevapi\Table;
 class Admin extends Authenticatable
 {
     use HasFactory;
-    public $timestamps = false;
+    //public $timestamps = false;
     protected $table = 'admins';
     protected $guard = 'admin';
     protected $fillable = [

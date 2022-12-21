@@ -103,9 +103,9 @@
 
                                 <li class="list-group-item" >
                                     <div id="cart1">
-                                        @if(isset($OrderProducts))
+                                        @if(isset($CartProduct))
 
-                                            @foreach($OrderProducts as $product)
+                                            @foreach($CartProduct as $product)
                                                 <span class="d-flex align-items-center product{{ $product->id  }}">
                                 <img width="60px" height="60px" src="{{ asset('products_photo/'.$product->photo) }}"  class="img-fit size-60px rounded lazyloaded" >
                                 <span class="minw-0 pl-2 flex-grow-1">

@@ -163,7 +163,7 @@
                         $('.aalert').show();
 
                     }
-                }, error: function (reject) {
+                }, error: function (reject) { console.log(reject);
                     $('.aalert').removeClass('alert-success');
                     $('.aalert').addClass('alert-danger');
                     $('.aalert').text('delete didnt succeed');

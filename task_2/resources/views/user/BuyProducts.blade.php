@@ -63,11 +63,11 @@
         $(document).on('click', '.AddToCart', function (e) {
 
             var produnt_id =  $(this).attr('product_id');
-            var quantity = $('.quantity'+produnt_id).val();
+            var quantity =  $('.quantity'+produnt_id).val();
 
             $.ajax({
                 type: 'post',
-                url: "{{ route('AddToCart2') }}",
+                url: "{{ route('AddProductToCart') }}",
                 data: {'_token': "{{csrf_token()}}",'id':produnt_id,'quantity':quantity},
                 success: function (data) {
                     if (data.status ) {console.log(data);
@@ -98,15 +98,15 @@
                         $('.aalert').removeClass('alert-danger');
                         $('.aalert').addClass('alert-success');
                         $('.aalert').text('add product to cart succeeded');
-                        $('.aalert').show();
+                        $('.aalert').show().delay(5000).fadeOut();
 
                     }
                 }, error: function (reject) {
                     console.log(reject);
                     $('.aalert').removeClass('alert-success');
                     $('.aalert').addClass('alert-danger');
-                    $('.aalert').text('error');
-                    $('.aalert').show();
+                    $('.aalert').text(reject.responseJSON.message);
+                    $('.aalert').show().delay(5000).fadeOut();
                 }
             });
         });
@@ -121,7 +121,7 @@
 
             $.ajax({
                 type: 'post',
-                url: "{{ route('DeleteFromCart2') }}",
+                url: "{{ route('DeleteProductFromCart') }}",
                 data: {'_token': "{{csrf_token()}}",'id':produnt_id},
                 success: function (data) {
                     if (data.status ) {
@@ -132,14 +132,14 @@
                         $('.aalert').removeClass('alert-danger');
                         $('.aalert').addClass('alert-success');
                         $('.aalert').text('remove product from cart succeeded');
-                        $('.aalert').show();
+                        $('.aalert').show().delay(5000).fadeOut();
 
                     }
-                }, error: function (reject) {
+                }, error: function (reject) {console.log(reject);
                     $('.aalert').removeClass('alert-success');
                     $('.aalert').addClass('alert-danger');
                     $('.aalert').text('product not found');
-                    $('.aalert').show();
+                    $('.aalert').show().delay(5000).fadeOut();
                 }
             });
         });

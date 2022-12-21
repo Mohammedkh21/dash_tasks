@@ -22,9 +22,9 @@
 
         <div class="row" style="padding: 0px; text-align: center">
             <div id="" style=" text-align: center">
-                @if(isset($OrderProducts))
+                @if(isset($CartProduct))
 
-                    @foreach($OrderProducts as $product)
+                    @foreach($CartProduct as $product)
                         <span class="d-flex align-items-center product{{ $product->id  }}">
                                 <span class="minw-0 pl-2 flex-grow-1">
                                     <img width="60px" height="60px" src="{{ asset('products_photo/'.$product->photo) }}"  class="img-fit size-60px rounded lazyloaded" >
@@ -51,7 +51,7 @@
 
                 <div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="pay_way" value="pay_when_received" id="inlineCheckbox1" value="option1">
+                        <input class="form-check-input" type="radio" name="pay_method" value="pay_when_received" id="inlineCheckbox1" value="option1">
                         <label class="form-check-label" for="inlineCheckbox1">pay when received</label>
                     </div>
                     <div class="form-check form-check-inline">

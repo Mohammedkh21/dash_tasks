@@ -32,10 +32,19 @@ class admin_controller extends Controller
         return redirect()->back()->withErrors(['error'=>'not found']);
     }
 
-
     public function dashboard(){
         return view('admin/main');
     }
+
+
+
+
+
+
+
+
+
+
 
 
     public function admins(){ $this->authorize('viewAdmin',auth()->guard('admin')->user());
@@ -53,8 +62,8 @@ class admin_controller extends Controller
         $request->validate([
             'name' => 'required|max:100|unique:sellers,name',
             'email' => 'required|email|max:255|unique:sellers,email',
-            'password' =>'required',
-            'confirm_password' => 'same:password',
+            'password' =>'required| min:6',
+            'confirm_password' => 'required_with:password|same:password|min:6',
         ]);
         Admin::create([
             'name'=>$request->name,
@@ -72,34 +81,35 @@ class admin_controller extends Controller
         return redirect()->route('admin.admins');
     }
 
+
+
     public function admins_update($id){  $this->authorize('updateAdmin',auth()->guard('admin')->user());
-        $admin = Admin::find($id);
+        $admin = Admin::findOrFail($id);
         if ($admin){
             return view('admin/admins/update',compact('admin'));
         }
         return redirect()->route('admin.admins')->withErrors(['error'=>'seller not found']);
     }
-    public function admin_update(Request $request){
-        $admin = Admin::find($request->id);
-        $roul = [
-            //'name' => 'required|max:100|unique:sellers,name',
-            //'email' => 'required|email|max:255|unique:sellers,email',
-            'password' =>'required',
-            'confirm_password' => 'same:password',
-        ];
-        if ($request->name != $admin->name){
-            $roul +=['name' => 'required|max:100|unique:admins,name'];
-        }
-        if ($request->email != $admin->email){
-            $roul +=['email' => 'required|max:100|unique:admins,email'];
-        }
 
+
+
+    public function admin_update(Request $request){
+        $roul = [
+            'name' => 'required|max:100|unique:sellers,name',
+            'email' => 'required|email|max:255|unique:sellers,email',
+        ];
         $request->validate($roul);
         Admin::where('id', $request->id)->update(['updated_at'=>date_create(date('Y-m-d h:i:s')),'name'=>$request->name,'email'=>$request->email,'password'=>Hash::make($request->password) ]);
 
         return redirect()->route('admin.admins')->with(['update'=>'update done']);
     }
-    public  function admin_permissions_update(Request $request){  $this->authorize('updateAdmin',auth()->guard('admin')->user());
+    public  function admin_permissions_update(Request $request){
+
+
+        $this->authorize('updateAdmin',auth()->guard('admin')->user());
+
+
+
         $admin = Admin::find($request->id);
         $permissions = json_decode($admin->permissions);
         $indix = array_search($request->category,array_column($permissions,'0')) ;
@@ -145,7 +155,9 @@ class admin_controller extends Controller
         }
         return redirect()->back()->withErrors(['error'=>'seller not found']);
     }
-    public  function updateCategory(Request $request){ $this->authorize('updateCategory',auth()->guard('admin')->user());
+    public  function updateCategory(Request $request){
+
+        $this->authorize('updateCategory',auth()->guard('admin')->user());
 
         $category = Category::with('product')->find($request->id);
         $roul = [];
@@ -158,6 +170,8 @@ class admin_controller extends Controller
                 $product->save();
             }
         }
+
+
         $request->validate($roul);
         Category::where('id', $request->id)->update(['name'=>$request->name,'status'=>$request->status ?? '0' ]);
 
@@ -311,7 +325,7 @@ class admin_controller extends Controller
             $c_id .=$c.',';
         }
         $request->validate([
-            'name' => 'required|max:100',
+            'name' => 'required|max:100',-
             'title' => 'required|max:255',
             'seller_id' =>'required|in:'.$s_id,
             'category_id' =>'required|in:'.$c_id,
