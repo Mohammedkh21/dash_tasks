@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
+use App\Notifications\User\OrderNotification;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
 
 class OrderController extends Controller
 {
@@ -15,7 +19,7 @@ class OrderController extends Controller
             $products = json_decode($order->products_data)->products ;
             $OrderProducts = [];
             foreach ($products as $p){
-                $product = Product::withTrashed()->find($p->id);
+                $product = Product::withTrashed()->findOrFail($p->id);
                 $product->quantity = $p->q;
                 array_push($OrderProducts, $product);
             }

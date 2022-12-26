@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('test',function (){
+    return \Illuminate\Support\Facades\Cache::put('products','33',5);
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -24,12 +26,14 @@ Route::get('/',[\App\Http\Controllers\User\CartController::class,'MainPage'])->n
 Route::get('Category/{name}',[\App\Http\Controllers\User\CartController::class,'CustomCategory'])->name('customCategory');
 Route::post('AddProductToCart',[\App\Http\Controllers\User\CartController::class,'AddProductToCart'])->name('AddProductToCart');
 Route::post('DeleteProductFromCart',[\App\Http\Controllers\User\CartController::class,'DeleteProductFromCart'])->name('DeleteProductFromCart');
-
+Route::post('StoreMail',[\App\Http\Controllers\Mail\MailController::class,'StoreMail'])->name('StoreMail');
 
 Route::group(['middleware'=>'auth'],function (){
     Route::get('checkoutPage',[\App\Http\Controllers\User\CheckoutController::class,'CheckoutPage'])->name('checkoutPage');
     Route::post('checkout',[\App\Http\Controllers\User\CheckoutController::class,'Checkout'])->name('checkout');
     Route::get('myOrders',[\App\Http\Controllers\User\CheckoutController::class,'MyOrders'])->name('myOrders');
+    Route::post('MakeNotificationAsReaded',[\App\Http\Controllers\Notification\NotificationController::class,'MakeNotificationAsReaded'])->name('MakeNotificationAsReaded');
+
 });
 
 Route::group([],function (){
@@ -39,6 +43,8 @@ Route::group([],function (){
 
         Route::group(['middleware'=>'auth:admin'],function (){
             Route::get('/',[\App\Http\Controllers\Admin\AuthController::class,'DashboardPage'])->name('admin.dashboard');
+            Route::post('SendEmail',[\App\Http\Controllers\Mail\MailController::class,'SendEmail'])->name('SendEmail');
+
             Route::get('admin/logout', [\App\Http\Controllers\Admin\AuthController::class, 'LogoutAdmin'])
                 ->name('admin.logout');
 
@@ -103,7 +109,7 @@ Route::group([],function (){
                 Route::post('products/update',[\App\Http\Controllers\Admin\ProductController::class,'UpdateProduct'])
                     ->name('admin.product.update')
                     ->middleware('can:updateProduct,'. \App\Models\Admin::class);
-                Route::post('products/delete',[\App\Http\Controllers\Admin\ProductController::class,'DeleteAdmin'])
+                Route::post('products/delete',[\App\Http\Controllers\Admin\ProductController::class,'DeleteProduct'])
                     ->name('admin.product.delete')
                     ->middleware('can:deleteProduct,'. \App\Models\Admin::class);
 
@@ -178,8 +184,5 @@ Route::group([],function (){
 Route::get('run_command',[\App\Http\Controllers\CurrenciesController::class,'run_command']);
 
 
-Route::get('test',function (\Illuminate\Support\Facades\Request $request){
-   return  \App\Models\User::find('2')->order;
-});
 
 

@@ -85,9 +85,9 @@
                                             <td>{{ $product->quantity }}</td>
                                             <td>{{ $product->price }}</td>
                                             @if($product->image)
-                                            <td><img src="{{ asset('products_photo/'. $product->image->path) }}" width="50px" height="50px"  > </td>
+                                            <td><img src="{{ \Illuminate\Support\Facades\Storage::disk('Images')->url('/'.$product->photo)  }}" width="50px" height="50px"  > </td>
                                             @else
-                                                <td><img src="{{ asset('products_photo/n0vzTic2jFNCVGOFYycB8d4Id6pJkm6aJuXUmaCT.jpg') }}" width="50px" height="50px"  > </td>
+                                                <td>no image</td>
                                             @endif
                                             <td>{{  $product->category->name }}</td>
                                             <td>{{ $product->currencie->cc }}</td>

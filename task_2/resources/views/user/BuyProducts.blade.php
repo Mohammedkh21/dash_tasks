@@ -20,7 +20,7 @@
             @if(isset($OrderProducts))
                 @foreach($OrderProducts as $product)
                     <div class="card product{{ $product->id  }} " style="width: 10rem;float: right">
-                        <img src="{{ asset('products_photo/'.$product->photo) }}" height="100px" width="100px" class="card-img-top" alt="...">
+                        <img src="{{ asset('storage/images/'.$product->photo) }}" height="100px" width="100px" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->name  }}</h5>
                             <p class="card-text">{{ $product->titel }}</p>
@@ -38,7 +38,7 @@
         <div class="row" style="padding: 0px">
         @foreach($products as $product)
             <div class="card" style="width: 18rem;">
-                <img src="{{ asset('products_photo/'.$product->photo) }}" height="100px" width="100px" class="card-img-top" alt="...">
+                <img src="{{asset('storage/images/'.$product->photo) }}" height="100px" width="100px" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ $product->name  }}</h5>
                     <p class="card-text">{{ $product->titel }}</p>
@@ -79,7 +79,7 @@
 
                             html1 +=
                                 "<span class='d-flex align-items-center product"+ p.id +"'> "+
-                                "<img width='60px' height='60px'src='{{ asset('products_photo') }}/"+ p.photo +" '   class='img-fit size-60px rounded lazyloaded' >"+
+                                "<img width='60px' height='60px'src='{{ asset('storage/images/') }}/"+ p.photo +" '   class='img-fit size-60px rounded lazyloaded' >"+
                                 "<span class='minw-0 pl-2 flex-grow-1'>"+
                                 "<span class='fw-600 mb-1 text-truncate-2'>"+ p.name +"</span>"+
                                 "<span >  "+ p.quantity +"x</span>"+

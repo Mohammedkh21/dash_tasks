@@ -27,7 +27,7 @@
                     @foreach($CartProduct as $product)
                         <span class="d-flex align-items-center product{{ $product->id  }}">
                                 <span class="minw-0 pl-2 flex-grow-1">
-                                    <img width="60px" height="60px" src="{{ asset('products_photo/'.$product->photo) }}"  class="img-fit size-60px rounded lazyloaded" >
+                                    <img width="60px" height="60px" src="{{ asset('storage/images/'.$product->photo) }}"  class="img-fit size-60px rounded lazyloaded" >
                                     <span class="fw-600 mb-1 text-truncate-2">
                                             {{ $product->name  }}
                                     </span>

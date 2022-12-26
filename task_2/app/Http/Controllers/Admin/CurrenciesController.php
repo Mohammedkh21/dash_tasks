@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Artisan;
 class CurrenciesController extends Controller
 {
     public function CurrenciesPage(){
-        $Currencies = Currencie::all();
+        $Currencies = Currencie::paginate(10);
         return view('admin/Currencies/all',compact('Currencies'));
     }
     public function UpdateCurrencies(Request $request){

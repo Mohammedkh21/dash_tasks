@@ -29,7 +29,6 @@
 </head>
 
 <body id="page-top">
-
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -107,7 +106,7 @@
 
                                             @foreach($CartProduct as $product)
                                                 <span class="d-flex align-items-center product{{ $product->id  }}">
-                                <img width="60px" height="60px" src="{{ asset('products_photo/'.$product->photo) }}"  class="img-fit size-60px rounded lazyloaded" >
+                                <img width="60px" height="60px" src="{{ asset('storage/images/'.$product->photo) }}"  class="img-fit size-60px rounded lazyloaded" >
                                 <span class="minw-0 pl-2 flex-grow-1">
                                     <span class="fw-600 mb-1 text-truncate-2">
                                             {{ $product->name  }}
@@ -131,6 +130,37 @@
                             <!-- <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>  -->
 
                     </li>
+
+                    @auth
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <!-- Counter - Alerts -->
+                            <span class="badge badge-danger badge-counter">{{ auth()->user()->unreadNotifications->count()}}</span>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div style="max-height: 300px;overflow: auto;" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Notification
+                            </h6>
+                            @foreach( auth()->user()->Notifications as $notification)
+                            <a class="dropdown-item d-flex align-items-center notifications" notification_id="{{ $notification->id }}"   href="{{ route('myOrders') }}"
+                               @if($notification->read_at) style="background-color: #ebebeb" @endif >
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">{{ $notification->created_at }}</div>
+                                    <span class="font-weight-bold">{{ $notification->data['message'] }}</span>
+                                </div>
+                            </a>
+                            @endforeach
+                        </div>
+                    </li>
+                    @endauth
+                    <div class="topbar-divider d-none d-sm-block"></div>
                     @guest
                         <li class="nav-item dropdown no-arrow mx-1" style="margin-top: 20px" >
                             <a href="{{ route('login') }}">login</a>
@@ -152,7 +182,7 @@
                     <!-- Nav Item - Messages -->
 
 
-                    <div class="topbar-divider d-none d-sm-block"></div>
+
 
                     <!-- Nav Item - User Information -->
 
@@ -169,9 +199,19 @@
 
         </div>
         <!-- End of Main Content -->
+        <di id="MailAlart">
 
+        </di>
         <!-- Footer -->
         <footer class="sticky-footer bg-white" >
+            <di class="alert  " id="MailAlart">
+
+            </di>
+            <div id="ddv4d" class="mt-3">
+                <button id="sendMail" type="button" class="btn btn-danger butt">الاشتراك</button>
+                <input id="inputMail" class="inp" type="email" placeholder="عنوان بريدك الالكتروني">
+            </div>
+            <br><br><br><br>
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
                     <span>Copyright &copy; Your Website 2021</span>
@@ -212,6 +252,41 @@
 </div>
     @yield('ajax')
 <!-- Bootstrap core JavaScript-->
+<script>
+    $(document).on('click', '.notifications', function (e) {
+        var notification_id =  $(this).attr('notification_id');
+        $.ajax({
+            type: 'post',
+            url: "{{ route('MakeNotificationAsReaded') }}",
+            data: {'_token': "{{csrf_token()}}",'notification_id':notification_id},
+        });
+    });
+    $(document).on('click', '#sendMail', function (e) {
+
+        var email =  $('#inputMail').val();
+
+        $.ajax({
+            type: 'post',
+            url: "{{ route('StoreMail') }}",
+            data: {'_token': "{{csrf_token()}}",'email':email},
+            success: function (data) {
+                if (data.status ) {
+
+                    $('#MailAlart').removeClass('alert-danger');
+                    $('#MailAlart').addClass('alert-success');
+                    $('#MailAlart').text('succeeded');
+                    $('#MailAlart').show().delay(5000).fadeOut();
+
+                }
+            }, error: function (reject) {console.log(reject);
+                $('#MailAlart').removeClass('alert-success');
+                $('#MailAlart').addClass('alert-danger');
+                $('#MailAlart').text('email exist');
+                $('#MailAlart').show().delay(5000).fadeOut();
+            }
+        });
+    });
+</script>
 <script src="{{ asset('asset/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -232,5 +307,47 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
 </body>
+<style>
+    #MailAlart{
+        width: 400px;
+        height: 40px;
+        /* color: black; */
+        position: relative;
+        left: 20px;
+        z-index: 5;
+        left: 637px;
+        top: 40px;
+    }
+    #ddv4d{
+        width: 75%;
+        float: right;
+        position: relative;
+        width: 400px;
+        background-color: black;
+        right: 650px;
+    }
+    #ddv4d input{
+        width: 100%;
+        float: right;
+        text-align: right;
+        height: 44px;
+        border-radius: 5px;
+        padding: 10px;
+        border: none;
+        outline:none;
+    }
+    #ddv4d input:active{
+        border: none;
+        outline:none;
+    }
+    #ddv4d button{
+        position: absolute;
+        width: 87px;
+        float: left;
+        left: 5px;
+        top: 5px;
+        font-size: 14px;
+    }
+</style>
 
 </html>

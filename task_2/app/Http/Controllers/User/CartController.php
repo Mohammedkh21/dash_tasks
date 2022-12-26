@@ -5,14 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Traits\PriceCoin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public function PriceCoinToUsd($CoinName): int{
-        return (\Illuminate\Support\Facades\Http::get('https://open.er-api.com/v6/latest/USD'))['rates'][$CoinName];
-    }
+    use PriceCoin;
+
 
     public function MainPage(){
         $categorys = Category::all();
