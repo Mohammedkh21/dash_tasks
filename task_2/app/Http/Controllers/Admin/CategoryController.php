@@ -51,9 +51,6 @@ class CategoryController extends Controller
         $category = Category::with('product')->findOrFail($request->id);
 
         $id = $category->id;
-        foreach ($category->product as $product){
-            $product->delete();
-        }
         $category->delete();
         return response()->json(['status'=>true,'id'=>$id],200);
 

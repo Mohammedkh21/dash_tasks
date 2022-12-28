@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('test',function (){
-    return \Illuminate\Support\Facades\Cache::put('products','33',5);
+    return Category::find('22')->product;
 });
 Auth::routes();
 
